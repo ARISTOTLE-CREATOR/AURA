@@ -1,0 +1,179 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-aria: var(--aria);
+  --color-aria-foreground: var(--aria-foreground);
+  --color-nova: var(--nova);
+  --color-nova-foreground: var(--nova-foreground);
+  --color-echo: var(--echo);
+  --color-echo-foreground: var(--echo-foreground);
+
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-instrument-serif), ui-serif, Georgia, serif;
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+}
+
+:root,
+.dark {
+  color-scheme: dark;
+
+  --background: oklch(0.16 0.012 275);
+  --foreground: oklch(0.97 0.005 280);
+
+  --card: oklch(0.21 0.014 275);
+  --card-foreground: oklch(0.97 0.005 280);
+
+  --popover: oklch(0.19 0.014 275);
+  --popover-foreground: oklch(0.97 0.005 280);
+
+  --primary: oklch(0.97 0.005 280);
+  --primary-foreground: oklch(0.17 0.012 275);
+
+  --secondary: oklch(0.27 0.016 275);
+  --secondary-foreground: oklch(0.97 0.005 280);
+
+  --muted: oklch(0.27 0.016 275);
+  --muted-foreground: oklch(0.68 0.018 280);
+
+  --accent: oklch(0.3 0.018 275);
+  --accent-foreground: oklch(0.97 0.005 280);
+
+  --destructive: oklch(0.62 0.21 25);
+
+  --border: oklch(0.97 0.01 280 / 12%);
+  --input: oklch(0.97 0.01 280 / 15%);
+  --ring: oklch(0.7 0.05 300);
+
+  /* Assistant brand accents */
+  --aria: oklch(0.72 0.19 348);
+  --aria-foreground: oklch(0.16 0.012 275);
+  --nova: oklch(0.68 0.16 255);
+  --nova-foreground: oklch(0.16 0.012 275);
+  --echo: oklch(0.76 0.17 158);
+  --echo-foreground: oklch(0.16 0.012 275);
+
+  --radius: 0.9rem;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .glass {
+    background: color-mix(in oklch, var(--card) 55%, transparent);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+    border: 1px solid var(--border);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* soft breathing ring for live assistant activity */
+  .animate-aura-pulse {
+    animation: aura-pulse 2.4s ease-in-out infinite;
+  }
+}
+
+/* Accessibility: high-contrast mode boosts surface + border legibility */
+[data-contrast='high'] {
+  --background: oklch(0.09 0.008 275);
+  --foreground: oklch(0.99 0 0);
+  --card: oklch(0.14 0.01 275);
+  --muted-foreground: oklch(0.82 0.01 280);
+  --border: oklch(0.99 0.01 280 / 32%);
+  --input: oklch(0.99 0.01 280 / 38%);
+}
+[data-contrast='high'] .glass {
+  background: color-mix(in oklch, var(--card) 88%, transparent);
+  border-color: var(--border);
+}
+
+/* Accessibility: large-text mode scales the base font */
+[data-text-size='large'] {
+  font-size: 1.125rem;
+}
+
+@keyframes aura-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+@keyframes aura-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-24px) scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes aura-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes aura-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
+}
+
+.animate-aura-float {
+  animation: aura-float 9s ease-in-out infinite;
+}
