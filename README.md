@@ -20,7 +20,6 @@ AURA envisions a future where AI can understand, translate, and express communic
 - 💬 Real-time AI Translation
 - 🌍 Multilingual Support
 - 🧠 Intelligent AI Assistants
-- 📱 Cross-Platform Compatibility
 
 ## 🖥️ Prototype
 
