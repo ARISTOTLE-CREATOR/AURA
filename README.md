@@ -26,7 +26,7 @@ AURA envisions a future where AI can understand, translate, and express communic
 This repository currently contains the **frontend prototype** of AURA.
 
 The prototype focuses on:
-- Landing page design
+- Landing  page design
 - User interface and user experience
 - Visual identity
 - Responsive layouts
